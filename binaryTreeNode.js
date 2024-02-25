@@ -1,5 +1,7 @@
-class Node {
-    lc = rc = value = null;
+export class Node {
+    lc = null
+    rc = null
+    value = null;
     constructor(value) {
         this.value = value;
         this.lc = this.rc = null;
