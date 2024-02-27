@@ -1,3 +1,5 @@
+import {Node} from "./binaryTreeNode.js";
+
 export const DEFAULT_CONFIG = {
     radius: 20,
     nodeWidthSpacing: 30, // width and height are bigger then node ek box mei node hei suppose kro
@@ -80,4 +82,55 @@ export function connectEdges(canvasElement , xCoordinates, yCoordinates) {
     context.bezierCurveTo(cpoint1.x , cpoint1.y , cpoint2.x, cpoint2.y , end.x , end.y);
     // context.lineTo(end.x, end.y);
     context.stroke();
+}
+
+export function treeConstructor(input) {
+    input = parseInput(input);
+
+    const queue = [];
+
+    let idx = 0;
+    const root = new Node(input[idx]);
+    idx++;
+
+    queue.push(root);
+
+    while (queue.length > 0 && idx < input.length) {
+        const node = queue.shift();
+
+        // Left child
+        if (idx < input.length) {
+            if (input[idx] !== null) {
+                const leftNode = new Node(input[idx]);
+                node.setLeftChild(leftNode);
+                queue.push(leftNode);
+            }
+            idx++;
+        }
+
+        // Right child
+        if (idx < input.length) {
+            if (input[idx] !== null) {
+                const rightNode = new Node(input[idx]);
+                node.setRightChild(rightNode);
+                queue.push(rightNode);
+            }
+            idx++;
+        }
+    }
+
+    return root;
+}
+
+function parseInput(input) {
+    let parsedInput = '';
+    for(let i=0;i<input.length;i++) {
+        let ch = input.charAt(i);
+        if(ch!='') parsedInput+=ch;
+    }
+    console.log(parsedInput);
+    return parsedInput.split(",")?.map(el=>{
+        if(el == 'null') return null;
+        else return el;
+    });
 }

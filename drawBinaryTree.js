@@ -1,7 +1,10 @@
 import { Node } from "./binaryTreeNode.js";
-import { getRequiredHeightAndWidth , DEFAULT_CONFIG , drawNode , connectEdges } from "./treeUtils.js";
+import { getRequiredHeightAndWidth , DEFAULT_CONFIG , drawNode , connectEdges , treeConstructor } from "./treeUtils.js";
 
 const canvas = document.querySelector("canvas");
+const applyBtn = document.querySelector(".applyBtn");
+const clearBtn = document.querySelector(".clearBtn");
+const textArea = document.querySelector("textarea")
 
 function drawBinaryTree(root, canvasElement) {
 
@@ -90,22 +93,29 @@ function recursivelyDrawNodes(root , canvasElement, currentLevel , horizontalCon
     }
 }
 
-const root = new Node(10);
+function init(value) {
+  const root = treeConstructor(value);
+  drawBinaryTree(root , canvas);
+}
 
-const node2 = new Node(2);
+applyBtn.addEventListener("click", ()=> {
+  if(textArea.value) {
+    init(textArea.value)
+  }
+});
 
-const node3 = new Node(3);
+function clearCanvas() {
+  const context = canvas.getContext("2d");
+  context.clearRect(0,0,canvas.width,canvas.height);
+}
+window.addEventListener("resize",()=>{
+  clearCanvas();
+  if(textArea.value) {
+    init(textArea.value)
+  }
+})
 
-root.setLeftChild(node2);
-
-root.setRightChild(node3);
-
-const node4 = new Node(10);
-node2.setLeftChild(new Node(10));
-node3.setLeftChild(node4);
-node4.setRightChild(new Node(10));
-// node2.setLeftChild(new Node(10));
-
-console.log(root);
-
-drawBinaryTree(root , canvas);
+clearBtn.addEventListener("click",()=>{
+  clearCanvas();
+  textArea.value = '';
+})
