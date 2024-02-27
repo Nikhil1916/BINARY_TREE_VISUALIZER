@@ -9,7 +9,7 @@ function drawBinaryTree(root, canvasElement) {
     const maxWidth = window.innerWidth;
 
     // initialize canvas dimesions
-    console.log(maxHeight , maxWidth);
+    // console.log(maxHeight , maxWidth);
     canvasElement.width = maxWidth;
     canvasElement.height = maxHeight;
 
@@ -100,8 +100,10 @@ root.setLeftChild(node2);
 
 root.setRightChild(node3);
 
+const node4 = new Node(10);
 node2.setLeftChild(new Node(10));
-node3.setLeftChild(new Node(10));
+node3.setLeftChild(node4);
+node4.setRightChild(new Node(10));
 // node2.setLeftChild(new Node(10));
 
 console.log(root);

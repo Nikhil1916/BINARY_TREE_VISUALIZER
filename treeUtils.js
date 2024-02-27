@@ -57,6 +57,18 @@ export function connectEdges(canvasElement , xCoordinates, yCoordinates) {
         y: yStart
     }
 
+    const xHalf = (xStart + xEnd) / 2;
+    const yHalf = (yStart + yEnd) / 2;
+    const cpoint1 = {
+        x: xHalf,
+        y: yHalf
+    }
+
+    const cpoint2 = {
+        x: xEnd,
+        y: yHalf
+    }
+
     const end = {
         x: xEnd,
         y: yEnd
@@ -65,6 +77,7 @@ export function connectEdges(canvasElement , xCoordinates, yCoordinates) {
     context.beginPath();
     context.strokeStyle = 'brown';
     context.moveTo(start.x , start.y);
-    context.lineTo(end.x, end.y);
+    context.bezierCurveTo(cpoint1.x , cpoint1.y , cpoint2.x, cpoint2.y , end.x , end.y);
+    // context.lineTo(end.x, end.y);
     context.stroke();
 }
