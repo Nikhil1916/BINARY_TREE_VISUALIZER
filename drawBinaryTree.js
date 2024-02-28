@@ -1,4 +1,3 @@
-import { Node } from "./binaryTreeNode.js";
 import { getRequiredHeightAndWidth , DEFAULT_CONFIG , drawNode , connectEdges , treeConstructor } from "./treeUtils.js";
 
 const canvas = document.querySelector("canvas");
@@ -37,6 +36,12 @@ function drawBinaryTree(root, canvasElement) {
     recursivelyDrawNodes(root, canvasElement , 0.5 , horizontalConfig);
 }
 
+
+// Algo:
+// 1. Find root node coordinates
+// 2. Draw root circle
+// 3. Recursively draw left & right nodes
+// 4. Connect edges of root with left & right nodes
 
 function recursivelyDrawNodes(root , canvasElement, currentLevel , horizontalConfig) {
     const {xStart , xEnd} =  horizontalConfig;

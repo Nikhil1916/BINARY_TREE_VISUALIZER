@@ -2,7 +2,7 @@ import {Node} from "./binaryTreeNode.js";
 
 export const DEFAULT_CONFIG = {
     radius: 20,
-    nodeWidthSpacing: 30, // width and height are bigger then node ek box mei node hei suppose kro
+    nodeWidthSpacing: 50, // width and height are bigger then node ek box mei node hei suppose kro
     nodeHeightSpacing: 100, // line height or Y-axis height
     fontSize: 10    
 }
@@ -128,9 +128,8 @@ function parseInput(input) {
         let ch = input.charAt(i);
         if(ch!='') parsedInput+=ch;
     }
-    console.log(parsedInput);
     return parsedInput.split(",")?.map(el=>{
         if(el == 'null') return null;
         else return el;
-    });
+    })?.filter(el=>el!='');
 }
