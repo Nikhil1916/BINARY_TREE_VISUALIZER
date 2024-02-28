@@ -1,10 +1,10 @@
-import {Node} from "./binaryTreeNode.js";
+import { Node } from "./binaryTreeNode.js";
 
 export const DEFAULT_CONFIG = {
     radius: 20,
     nodeWidthSpacing: 50, // width and height are bigger then node ek box mei node hei suppose kro
     nodeHeightSpacing: 100, // line height or Y-axis height
-    fontSize: 10    
+    fontSize: 10
 }
 
 
@@ -16,7 +16,7 @@ export function getRequiredHeightAndWidth(root) {
     const reqCanvasHeight = treeHeight * DEFAULT_CONFIG['nodeHeightSpacing'];
 
     // to get width of canvas we will use no of leaf nodes that is 2 ki power height then multiply by node width
-    const noOfLeafNodes = Math.pow(2 , treeHeight);
+    const noOfLeafNodes = Math.pow(2, treeHeight);
     const reqCanvasWidth = noOfLeafNodes * DEFAULT_CONFIG['nodeWidthSpacing'];
 
     return {
@@ -25,19 +25,19 @@ export function getRequiredHeightAndWidth(root) {
     }
 }
 
-export function drawNode(value , canvasElement , x , y) {
+export function drawNode(value, canvasElement, x, y) {
     const context = canvasElement.getContext("2d"); // tool to draw
 
     // draw circle
     context.beginPath();
-    context.arc(x, y, DEFAULT_CONFIG.radius , 0 , 2*Math.PI);
+    context.arc(x, y, DEFAULT_CONFIG.radius, 0, 2 * Math.PI);
     context.fillStyle = 'lightsalmon';
     context.fill();
 
 
     // /draw circle border
     context.beginPath();
-    context.arc(x, y, DEFAULT_CONFIG.radius , 0 , 2*Math.PI);
+    context.arc(x, y, DEFAULT_CONFIG.radius, 0, 2 * Math.PI);
     context.strokeStyle = 'brown';
     context.stroke();
 
@@ -45,13 +45,13 @@ export function drawNode(value , canvasElement , x , y) {
     context.font = `${DEFAULT_CONFIG?.fontSize}pt serif`;
     context.fillStyle = 'brown';
     context.textAlign = 'center';
-    context.fillText(value , x , y + DEFAULT_CONFIG?.fontSize/2);
+    context.fillText(value, x, y + DEFAULT_CONFIG?.fontSize / 2);
 
 }
 
-export function connectEdges(canvasElement , xCoordinates, yCoordinates) {
-    const {xStart , xEnd} = xCoordinates;
-    const {yStart , yEnd} = yCoordinates;
+export function connectEdges(canvasElement, xCoordinates, yCoordinates) {
+    const { xStart, xEnd } = xCoordinates;
+    const { yStart, yEnd } = yCoordinates;
 
     // draw curve
     const start = {
@@ -78,8 +78,8 @@ export function connectEdges(canvasElement , xCoordinates, yCoordinates) {
     const context = canvasElement.getContext("2d"); // tool to draw
     context.beginPath();
     context.strokeStyle = 'brown';
-    context.moveTo(start.x , start.y);
-    context.bezierCurveTo(cpoint1.x , cpoint1.y , cpoint2.x, cpoint2.y , end.x , end.y);
+    context.moveTo(start.x, start.y);
+    context.bezierCurveTo(cpoint1.x, cpoint1.y, cpoint2.x, cpoint2.y, end.x, end.y);
     // context.lineTo(end.x, end.y);
     context.stroke();
 }
@@ -124,12 +124,12 @@ export function treeConstructor(input) {
 
 function parseInput(input) {
     let parsedInput = '';
-    for(let i=0;i<input.length;i++) {
+    for (let i = 0; i < input.length; i++) {
         let ch = input.charAt(i);
-        if(ch!='') parsedInput+=ch;
+        if (ch != '') parsedInput += ch;
     }
-    return parsedInput.split(",")?.map(el=>{
-        if(el == 'null') return null;
+    return parsedInput.split(",")?.map(el => {
+        if (el == 'null') return null;
         else return el;
-    })?.filter(el=>el!='');
+    })?.filter(el => el != '');
 }

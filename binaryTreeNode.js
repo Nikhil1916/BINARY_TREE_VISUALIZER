@@ -18,6 +18,6 @@ export class Node {
     getHeight() {
         const leftHeight = this.lc?.getHeight() || 0;
         const rightHeight = this.lc?.getHeight() || 0;
-        return Math.max(leftHeight , rightHeight) + 1;
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 }
